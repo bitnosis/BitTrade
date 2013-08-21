@@ -19,17 +19,18 @@
   .hero-unit
     h1 BitTrade
     h2 mtGOX BTC DATA
+
     p Displaying market data from mtGOX BITCOIN EXCHANGE
     p
       a.btn.btn-primary.btn-large(href="#") Lean more >>
-
+      h3 LAST TRADED PRICE :  1 BTC = $#{data.last}
       block content
   div.top
     
   div.container
     div.content
-      div.span5
-        table.table.table-striped
+      div.span2
+        table.table
           thead
             tr
               th Volume
@@ -37,19 +38,19 @@
               th Price
               th Volume
           tbody
-            each bids in data
+            each asks in data.asks
               tr
-                td #{bids.amount}
-                td #{bids.price}
-                td
-                td
+                td.nodata 
+                td.nodata 
+                td.ask.price $#{asks.price.toFixed(3)}
+                td.ask #{asks.amount.toFixed(2)} BTC
 
-            each asks in data
+            each bids in data.bids
               tr
-                td 
-                td 
-                td #{asks.price}
-                td #{asks.amount}
-      div.span8("style='height:200px;background:black;'")
+                td.bid #{bids.amount.toFixed(2)} BTC
+                td.bid.price $#{bids.price.toFixed(3)}
+                td.nodata
+                td.nodata 
+  div.span8("style='height:200px;background:black;'")
     
   div.footer
