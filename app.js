@@ -4,8 +4,11 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , theClient = require('./lib/mtgox')
+  , bitcoin = new theClient('my_key', 'my_secret');
 
+console.log(bitcoin);
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -43,6 +46,9 @@ express.compiler.compilers.less.compile = function(str, fn){
 
 app.get('/', routes.index);
 
+
+
+
 app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log('Express server listening on port %d in %s mode', app.address().port, app.settings.env);
 });

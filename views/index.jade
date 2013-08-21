@@ -1,4 +1,3 @@
-
 .navbar.navbar-fixed-top
   .navbar-inner
     .container
@@ -11,9 +10,46 @@
             a(href="#about") About
           li
             a(href="#contact") Contact
+        form.pull-right(method="post", id="loginForm")
+          input.input-small(id="username", type="text", name="User", placeholder="Username")
+          input.input-small(id="password", type="password", name="Password", placeholder="Password")
+          input.btn.primary(type="submit", value="Sign In")
+        p#loginPrompt.pull-right.login-prompt
 .container
   .hero-unit
-    h1 Hello, World!
-    p This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+    h1 BitTrade
+    h2 mtGOX BTC DATA
+    p Displaying market data from mtGOX BITCOIN EXCHANGE
     p
       a.btn.btn-primary.btn-large(href="#") Lean more >>
+
+      block content
+  div.top
+    
+  div.container
+    div.content
+      div.span5
+        table.table.table-striped
+          thead
+            tr
+              th Volume
+              th Price
+              th Price
+              th Volume
+          tbody
+            each bids in data
+              tr
+                td #{bids.amount}
+                td #{bids.price}
+                td
+                td
+
+            each asks in data
+              tr
+                td 
+                td 
+                td #{asks.price}
+                td #{asks.amount}
+      div.span8("style='height:200px;background:black;'")
+    
+  div.footer

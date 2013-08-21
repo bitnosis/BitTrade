@@ -5993,3 +5993,6 @@ body {
     overflow: visible !important;
   }
 }
+.navbar-fixed-top {
+  height: 400px;
+}
