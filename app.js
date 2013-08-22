@@ -6,12 +6,36 @@
 var express = require('express')
   , routes = require('./routes')
   , theClient = require('./lib/mtgox')
-  , bitcoin = new theClient('my_key', 'my_secret');
+  , bitcoin = new theClient('my_key', 'my_secret')
+  , mtgox = require('node-mtgox-client-streaming');
 
 console.log(bitcoin);
 var app = module.exports = express.createServer();
 
 // Configuration
+
+
+var API_KEY = undefined;
+var API_SECRET = undefined;
+
+var mtGox = new mtgox.MtGox(API_KEY, API_SECRET);
+mtGox.unsubscribe('trade');
+mtGox.unsubscribe('depth');
+//mtGox.unsubscribe('ticker');
+
+mtGox.onMessage(function(data) {
+  
+});
+
+mtGox.onDisconnect(function(data){
+
+});
+
+if (API_KEY && API_SECRET) {
+  mtGox.authEmit({
+    call: 'private/info'
+  });
+}
 
 app.configure(function(){
   app.set('views', __dirname + '/views');

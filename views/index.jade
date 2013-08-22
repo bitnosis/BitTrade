@@ -37,17 +37,17 @@
               th SELL
               th BUY
               th VOL
-          tbody
+          tbody.allasks
             each asks in data.asks
-              tr
+              tr.askrow(data-price="#{asks.price.toFixed(3)}")(data-vol="#{asks.amount.toFixed(3)}")
                 td.nodata 
                 td.nodata 
                 td.ask.price $#{asks.price.toFixed(3)}
-                td.ask #{asks.amount.toFixed(2)} BTC
-
+                td.ask.vol #{asks.amount.toFixed(2)} BTC
+          tbody.allbids
             each bids in data.bids
-              tr
-                td.bid #{bids.amount.toFixed(2)} BTC
+              tr.bidrow(data-price="#{bids.price.toFixed(3)}")(data-vol="#{bids.amount.toFixed(3)}")
+                td.bid.vol #{bids.amount.toFixed(2)} BTC
                 td.bid.price $#{bids.price.toFixed(3)}
                 td.nodata
                 td.nodata 
