@@ -24,13 +24,15 @@
     p
       a.btn.btn-primary.btn-large(href="#") Lean more >>
       h3 LAST TRADED PRICE : 
-      h2.lastprice #{data.last}
+      h2.lastprice #{parseFloat(data.last).toFixed(3)}
       block content
   div.top
     
   div.container
-    div.content
+    div.row-fluid
+      
       div.span3
+        h3 Market Depth
         table.table
           thead
             tr
@@ -52,13 +54,27 @@
                 td.bid.price $#{bids.price.toFixed(3)}
                 td.nodata
                 td.nodata 
-      div.span3
-         table.table
+      div.span4
+        h3 Time and Sales / Latest Trades
+        table.table
           thead
             tr
-              th VOL
-              th TYPE
-              th TIMESTAMP
-          tbody
+              th Ticket ID
+              th Volume
+              th Price
+              th BTC / USD
+          tbody.trades
+      div.span4
+        h3 Solved Network Transactions
+        table.table
+          thead
+            tr
+              th Hash Address
+              th BTC
+              th USD
+          tbody.transactions
+           
+
+
     
   div.footer

@@ -13,8 +13,8 @@ exports.index = function(req, res){
 		console.log(lastvalue);
 	
 		client.seeDepth(function(err, json){
-			var asks3 = json.data.asks.sort(function(a,b){return b.price - a.price;}).splice(-11,11);
-			var bids3 = json.data.bids.sort(function(a,b){return b.price - a.price;}).splice(0,11);
+			var asks3 = json.data.asks.sort(function(a,b){return b.price - a.price;}).splice(-6,6);
+			var bids3 = json.data.bids.sort(function(a,b){return b.price - a.price;}).splice(0,6);
 			res.render('index', { title: 'BitTrade', locals: {data: {'last': lastvalue, asks:asks3, bids:bids3} }})
 		});
 	});
