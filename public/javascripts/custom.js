@@ -16,8 +16,21 @@ $(document).ready(function() {
 			ws.onmessage = function(e){ 
 			var d = JSON.parse(e.data);
 			//DEBUGGING
-			console.log(d);
-			if(d.channel_name=="depth.BTCUSD"){
+			if(d.channel_name=="ticker.BTCUSD"){
+				var lastval = $('h2.lastprice').html();
+				console.log(d.ticker.last.value);
+				if(d.ticker.last.value>lastval){
+					$('h2.lastprice').html(d.ticker.last.value).css('color', 'green');
+				} else if(d.ticker.last.value>lastval){
+					$('h2.lastprice').html(d.ticker.last.value).css('color', 'red');
+				} else if(d.ticker.last.value==lastval){
+					$('h2.lastprice').html(d.ticker.last.value);
+				}
+							
+				
+				} 
+
+			else if(d.channel_name=="depth.BTCUSD"){
 				if(d.depth.type_str=="ask"){
 					
 					var N = asks.length;
@@ -42,14 +55,14 @@ $(document).ready(function() {
 
 					for(var j=1; j<N; j++){
 						
-						if((d.depth.price<bids[j].price)&&(d.depth.price>bids[j-1].price)){
+						if((d.depth.price>bids[j].price)&&(d.depth.price<bids[j-1].price)){
 							data = {"price":d.depth.price, "vol":d.depth.volume};
 							bids.splice(j, 0, data);
 						}
 						
 					}
 					
-					bids.sort(function(a, b) { return a.price - b.price });
+					bids.sort(function(a, b) { return b.price - a.price });
 					bids.splice(10,10);
 					
 					var html2 ="";

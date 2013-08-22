@@ -10,13 +10,12 @@ exports.index = function(req, res){
 	client.ticker(function(err, json) {
 		if (err) { throw err; }
 		var lastvalue = json.data.last.value;	
+		console.log(lastvalue);
 	
 		client.seeDepth(function(err, json){
-			var asks3 = json.data.asks.sort(function(a,b){return a.price - b.price;}).splice(this.length-10,10);
-			var asks3 = asks3.sort(function(a,b){return b.price - a.price;});
-			var bids3 = json.data.bids.sort(function(a,b){return b.price - a.price;}).splice(10,10);
-			var bids3 = bids3.sort(function(a,b){return a.price - b.price;});
-            res.render('index', { title: 'BitTrade', locals: {data: {'last': lastvalue, asks:asks3, bids:bids3} }})
+			var asks3 = json.data.asks.sort(function(a,b){return b.price - a.price;}).splice(-11,11);
+			var bids3 = json.data.bids.sort(function(a,b){return b.price - a.price;}).splice(0,11);
+			res.render('index', { title: 'BitTrade', locals: {data: {'last': lastvalue, asks:asks3, bids:bids3} }})
 		});
 	});
 };

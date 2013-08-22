@@ -23,13 +23,14 @@
     p Displaying market data from mtGOX BITCOIN EXCHANGE
     p
       a.btn.btn-primary.btn-large(href="#") Lean more >>
-      h3 LAST TRADED PRICE :  1 BTC = $#{data.last}
+      h3 LAST TRADED PRICE : 
+      h2.lastprice #{data.last}
       block content
   div.top
     
   div.container
     div.content
-      div.span4
+      div.span3
         table.table
           thead
             tr
@@ -39,18 +40,25 @@
               th VOL
           tbody.allasks
             each asks in data.asks
-              tr.askrow(data-price="#{asks.price.toFixed(3)}")(data-vol="#{asks.amount.toFixed(3)}")
+              tr.askrow(data-price="#{asks.price.toFixed(3)}", data-vol="#{asks.amount.toFixed(3)}")
                 td.nodata 
                 td.nodata 
                 td.ask.price $#{asks.price.toFixed(3)}
-                td.ask.vol #{asks.amount.toFixed(2)} BTC
+                td.ask.vol #{asks.amount.toFixed(2)} 
           tbody.allbids
             each bids in data.bids
-              tr.bidrow(data-price="#{bids.price.toFixed(3)}")(data-vol="#{bids.amount.toFixed(3)}")
-                td.bid.vol #{bids.amount.toFixed(2)} BTC
+              tr.bidrow(data-price="#{bids.price.toFixed(3)}", data-vol="#{bids.amount.toFixed(3)}")
+                td.bid.vol #{bids.amount.toFixed(2)}
                 td.bid.price $#{bids.price.toFixed(3)}
                 td.nodata
                 td.nodata 
-  div.span8("style='height:200px;background:black;'")
+      div.span3
+         table.table
+          thead
+            tr
+              th VOL
+              th TYPE
+              th TIMESTAMP
+          tbody
     
   div.footer
